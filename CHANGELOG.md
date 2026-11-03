@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Linux AppImage (`AssetDeck-x86_64.AppImage`) built from the PyInstaller output in the release workflow, with desktop entry and icon, smoke-tested offscreen (#23).
+
 ## [0.1.0] - 2026-10-31
 
 ### Added

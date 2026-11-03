@@ -43,6 +43,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
+            file \
             libegl1 \
             libgl1 \
             libxkbcommon0 \
@@ -114,6 +115,39 @@ jobs:
         run: |
           tar -czf AssetDeck-ubuntu.tar.gz -C dist assetdeck
 
+      - name: Build AppImage (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          packaging/linux/build_appimage.sh
+
+      - name: Smoke test do AppImage (Linux)
+        if: runner.os == 'Linux'
+        timeout-minutes: 2
+        env:
+          QT_QPA_PLATFORM: offscreen
+          APPIMAGE_EXTRACT_AND_RUN: "1"
+          ASSETDECK_CONFIG_DIR: ${{ runner.temp }}/config-appimage
+          ASSETDECK_DATA_DIR: ${{ runner.temp }}/data-appimage
+          ASSETDECK_CACHE_DIR: ${{ runner.temp }}/cache-appimage
+        run: |
+          SCREENSHOT="${{ runner.temp }}/screenshot-appimage.png"
+          rm -f "$SCREENSHOT"
+
+          ./AssetDeck-x86_64.AppImage --screenshot "$SCREENSHOT"
+
+          if [ ! -s "$SCREENSHOT" ]; then
+            echo "Smoke test do AppImage falhou: screenshot não foi gerado ou está vazio ($SCREENSHOT)"
+            exit 1
+          fi
+
+      - name: Upload AppImage artifact (Linux)
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: AssetDeck-x86_64.AppImage
+          path: AssetDeck-x86_64.AppImage
+          if-no-files-found: error
+
       - name: Package archive (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
@@ -153,6 +187,7 @@ jobs:
         with:
           files: |
             release-artifacts/AssetDeck-ubuntu.tar.gz
+            release-artifacts/AssetDeck-x86_64.AppImage
             release-artifacts/AssetDeck-windows.zip
             release-artifacts/AssetDeck-macos.zip
           generate_release_notes: true

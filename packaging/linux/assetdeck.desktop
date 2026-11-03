@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=AssetDeck
+Comment=Local asset manager integrated with Blender
+Comment[pt_BR]=Gerenciador de assets local, integrado ao Blender
+Exec=assetdeck %F
+Icon=assetdeck
+Terminal=false
+Categories=Graphics;3DGraphics;
+StartupNotify=true
+StartupWMClass=assetdeck

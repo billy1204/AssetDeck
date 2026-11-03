@@ -87,6 +87,17 @@ Executáveis pré-compilados para Windows, macOS e Linux estão disponíveis na 
 > - **macOS:** O Gatekeeper pode bloquear a abertura inicial. Clique com o **botão direito** no aplicativo e selecione **Abrir**, ou acesse **Ajustes do Sistema → Privacidade e Segurança** e clique em **Abrir mesmo assim**.
 > - **Linux:** Baixe o arquivo `.tar.gz`, extraia o conteúdo, torne o binário executável com `chmod +x assetdeck` e execute `./assetdeck`.
 
+### AppImage para Linux
+
+Cada release também publica um arquivo único `AssetDeck-x86_64.AppImage` (x86_64):
+
+```bash
+chmod +x AssetDeck-x86_64.AppImage
+./AssetDeck-x86_64.AppImage
+```
+
+Se o sistema não tiver FUSE (`libfuse2`), execute com `./AssetDeck-x86_64.AppImage --appimage-extract-and-run`. Para adicioná-lo ao menu de aplicativos, use uma ferramenta como o [Gear Lever](https://github.com/mijorus/gearlever) ou o AppImageLauncher.
+
 ---
 
 ## Instalação a partir do código-fonte

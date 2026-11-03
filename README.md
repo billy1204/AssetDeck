@@ -87,6 +87,17 @@ Pre-compiled binaries for Windows, macOS, and Linux are available on the officia
 > - **macOS:** Gatekeeper may block the initial launch. **Right-click** the application and select **Open**, or go to **System Settings → Privacy & Security** and click **Open Anyway**.
 > - **Linux:** Download the `.tar.gz` archive, extract the contents, make the binary executable with `chmod +x assetdeck`, and run `./assetdeck`.
 
+### Linux AppImage
+
+A single-file `AssetDeck-x86_64.AppImage` is also published with each release (x86_64):
+
+```bash
+chmod +x AssetDeck-x86_64.AppImage
+./AssetDeck-x86_64.AppImage
+```
+
+If your system lacks FUSE (`libfuse2`), run it with `./AssetDeck-x86_64.AppImage --appimage-extract-and-run`. To add it to your application menu, use a tool such as [Gear Lever](https://github.com/mijorus/gearlever) or AppImageLauncher.
+
 ---
 
 ## Installation from Source
